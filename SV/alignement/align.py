@@ -1,8 +1,14 @@
 import numpy as np
 
-match = 1
-mis = 0
-indel = -1
+match = 5
+mis = -4
+indel = -10
+
+MATCH = 0
+MIS = 1
+INS = 2
+DEL = 3
+
 
 def init(u,v) :
     len_u = len(u)
@@ -17,7 +23,7 @@ def init(u,v) :
         len_read = len_v
         genome = u
         len_gen = len_u
-    matrix = np.full((len_read+1,len_gen+1), float("-inf"))
+    matrix = np.zeros((len_read+1,len_gen+1))
     matrix[0][0] = 0
 
     for i in range(1,len_gen+1) :
@@ -35,30 +41,87 @@ def init(u,v) :
 
 def backtrap(matrix, len_read, len_gen) :
     score = max(matrix[len_read])
-    score_index = np.where(matrix[len_read] , score)
-    start = score_index[0]
-    i = read_len-1
-    j = start
+    score_index = np.nonzero(matrix[len_read] == score)[0][0]
+    op = []
+
+    i = len_read
+    j = score_index
     print "SCORE %d" % score
     print "BACKTRAP : "
-    back = ""
+    print("score_index : %d"%score_index)
+    tmp = len_gen
+
+    while (tmp > j) :
+        op.append(INS)
+        tmp -= 1
+
     while (i!=0 and j!=0) :
-        if (matrix[i][j] == matrix[i-1][j-1] - match) or (matrix[i][j] == matrix[i-1][j-1] - mismatch) :
+        if (matrix[i][j]-match == matrix[i-1][j-1]):
+            i -= 1
+            j-= 1
+            op.append(MATCH)
+            print("MATCH")
+        elif (matrix[i][j]-mis == matrix[i-1][j-1]) :
             i -= 1
             j -= 1
-        elif (matrix[i][j] == matrix[i-1][j] - indel) :
+            op.append(MIS)
+            print("MIS")
+        elif (matrix[i][j]-indel == matrix[i-1][j]) :
             i -= 1
-        elif (matrix[i][j] == matrix[i][j-1] - indel) :
+            op.append(INS)
+            print("INS")
+        elif (matrix[i][j]-indel == matrix[i][j-1]) :
             j -= 1
+            op.append(DEL)
+            print("DEL")
         else : 
+            print("OTHER %d "% i) 
             return
-        print("%d - %d : %d" % i, j, matrix[i][j]) 
+        print("%d - %d : %d" % (i, j, matrix[i][j]))
+    if j > 0 :
+        while j > 0 :
+            op.append(INS)
+            j -= 1
+    return op
+
+def print_result(op, genome, read) :
+    seq_g, seq_r, seq_o ="", "", ""
+    op.reverse()
+    cpt_g= 0
+    cpt_r = 0
+    for i in range(len(op)) :
+        if op[i] == MATCH :
+            seq_g += genome[cpt_g]
+            seq_r += read[cpt_r]
+            cpt_g += 1
+            cpt_r += 1
+            seq_o += '|'
+        elif op[i] == MIS :
+            seq_g += genome[cpt_g]
+            seq_r += read[cpt_r]
+            cpt_g += 1
+            cpt_r += 1
+            seq_o += ' '
+        elif op[i] == INS :
+            seq_g += genome[cpt_g]
+            seq_r += '-'
+            cpt_g += 1
+            seq_o += ' '
+        else :
+            seq_g += '-'
+            seq_r += read[cpt_r]
+            cpt_r += 1
+            seq_o += ' '
+    print seq_g+'\n', seq_o+'\n', seq_r+'\n'
 
 if __name__ == "__main__" :
-    v = 'GCAATATCACGCAT'
-    u = 'TCCATG'
+    #v = 'GCAATATCACGCAT'
+    #u = 'TCCATG'
 
+    v = 'tgggatggatcaaccctaacagtggtggcacaaactatgcacagaagtttcagggcagggtcaccatgaccagggacacgtccatcagcacagcctacatggagctgagcaggctgagatctgacgacacggccgtgtattactgtgcgagaga'
+    u = 'ttgcacgcattgattgggatgatgataaatactacagcacatctctgaagaccaggctcaccatctccaaggacacctccaaaaaccaggtggtccttacaatgaccaacatggaccctgtggacacggccgtgtattactg'
     matrix, len_read, len_gen = init(u,v)
     print matrix
-    backtrap(matrix, len_read, len_gen)
+    op = backtrap(matrix, len_read, len_gen)
+    print_result(op, v, u)
 
