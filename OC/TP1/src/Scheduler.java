@@ -38,14 +38,27 @@ public class Scheduler {
 	
 	public ArrayList<int[]> MDD (int[][] jobs) {
 		ArrayList<int[]> list = new ArrayList<int[]>();
-		Arrays.sort(jobs, new Comparator<int[]>() {
-		    public int compare(int[] s1, int[] s2) {
-		        int num1 = Math.max(comp + s1[0], s1[3]);
-		        int num2 = Math.max(comp + s2[0], s2[3]);
-		        return Integer.compare(num1, num2);
-		    }
-		});
-		list = new ArrayList<int[]>(Arrays.asList(jobs));
+		int min = Integer.MAX_VALUE;
+		int ind = -1;
+		int compl = 0;
+		int tmp = 0;
+		
+		while (list.size() < jobs.length) {
+			min = Integer.MAX_VALUE;
+			ind = -1;
+			for (int i =0; i<jobs.length; i++) {
+				if (!list.contains(jobs[i])) {
+					tmp = Math.max(compl+jobs[i][0], jobs[i][2]);
+					if (tmp < min) {
+						min = tmp;
+						ind = i;
+					}
+				}
+			}
+			list.add(jobs[ind]);
+			compl += jobs[ind][0];
+		}
+		
 		return list;
 	}
 	
