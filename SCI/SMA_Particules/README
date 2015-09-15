@@ -1,0 +1,28 @@
+Emilie Allart
+22/09/2015
+
+	RENDU SMA Particules
+	
+	Compilation :
+		*****
+		
+	Lancement :
+		*****
+		
+	Paramètres :
+		* int Longueur
+		* int Largeur
+		* int Taille_bille
+		* int Nb_bille
+		* int Ralentissement
+		* bool Torique : 
+		
+	Argumentation :
+		
+		* Utilisation de variables discrètes pour une question de rapidité (éviter de parcourir tous les agents pour savoir s'ils sont voisins)
+		* Torique ou non.
+		* En cas de collision des agents, changement de direction.
+		* 
+		
+		
+SEE : Conserver pasX et pasY dans Bille ou créer enum SENS
