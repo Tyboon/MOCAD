@@ -10,7 +10,7 @@ INS = 2
 DEL = 3
 
 
-def init(u,v) :
+def init(u,v,k=None) :
     len_u = len(u)
     len_v = len(v)
     if len_u < len_v :
@@ -23,29 +23,45 @@ def init(u,v) :
         len_read = len_v
         genome = u
         len_gen = len_u
-    matrix = np.zeros((len_read+1,len_gen+1))
+    matrix = np.full((len_read+1, len_gen+1), float("-inf"))
     matrix[0][0] = 0
 
-    for i in range(1,len_gen+1) :
-        if (i < len_read+1) :
-            matrix[i][0] = matrix[i-1][0] + indel
-        matrix[0][i] = matrix[0][i-1] + indel
+    # Remplissage des 1eres colonnes
+    if k == None :
+        for i in range(1,len_gen+1) :
+            if (i < len_read+1) :
+                matrix[i][0] = matrix[i-1][0] + indel
+            matrix[0][i] = matrix[0][i-1] + indel
+    else :
+        for i in range(1,k) :
+                if (i < len_read+1) :
+                    matrix[i][0] = matrix[i-1][0] + indel
+                matrix[0][i] = matrix[0][i-1] + indel
+            
 
+    # Remplissage de la matrice 
     for i in range(1,len_read+1) :
         for j in range(1,len_gen+1) :
             if read[i-1] == genome[j-1] :
                 matrix[i][j] = max((matrix[i-1][j-1] + match), (matrix[i][j-1] + indel), (matrix[i-1][j] + indel))
             else :
-                 matrix[i][j] = max((matrix[i-1][j-1] + mis), (matrix[i][j-1] + indel), (matrix[i-1]    [j] + indel))
-    return matrix, len_read, len_gen
+                 matrix[i][j] = max((matrix[i-1][j-1] + mis), (matrix[i][j-1] + indel), (matrix[i-1][j] + indel))
+    return matrix, len_read, len_gen, read, genome
 
-def backtrap(matrix, len_read, len_gen) :
+
+def backtrap(matrix, len_read, len_gen, read, genome) :
     score = max(matrix[len_read])
-    score_index = np.nonzero(matrix[len_read] == score)[0][0]
+    score_index = np.nonzero(matrix[len_read] == score)[0]
+    len_score = len(score_index)
     op = []
 
     i = len_read
-    j = score_index
+    
+    # Si plusieurs max
+    if (len_score > 1) :
+        j = score_index[np.randint(1, len_score-1)] 
+    else :
+        j = score_index
     print "SCORE %d" % score
     print "BACKTRAP : "
     print("score_index : %d"%score_index)
@@ -56,7 +72,7 @@ def backtrap(matrix, len_read, len_gen) :
         tmp -= 1
 
     while (i!=0 and j!=0) :
-        if (matrix[i][j]-match == matrix[i-1][j-1]):
+        if ((matrix[i][j]-match == matrix[i-1][j-1]) and (genome[j-1] == read[i-1])):
             i -= 1
             j-= 1
             op.append(MATCH)
@@ -68,20 +84,22 @@ def backtrap(matrix, len_read, len_gen) :
             print("MIS")
         elif (matrix[i][j]-indel == matrix[i-1][j]) :
             i -= 1
-            op.append(INS)
-            print("INS")
-        elif (matrix[i][j]-indel == matrix[i][j-1]) :
-            j -= 1
             op.append(DEL)
             print("DEL")
+        elif (matrix[i][j]-indel == matrix[i][j-1]) :
+            j -= 1
+            op.append(INS)
+            print("INS")
         else : 
             print("OTHER %d "% i) 
             return
         print("%d - %d : %d" % (i, j, matrix[i][j]))
+    '''
     if j > 0 :
         while j > 0 :
             op.append(INS)
             j -= 1
+    '''
     return op
 
 def print_result(op, genome, read) :
@@ -89,6 +107,8 @@ def print_result(op, genome, read) :
     op.reverse()
     cpt_g= 0
     cpt_r = 0
+   
+    print len(op), len(genome), len(read)
     for i in range(len(op)) :
         if op[i] == MATCH :
             seq_g += genome[cpt_g]
@@ -107,11 +127,13 @@ def print_result(op, genome, read) :
             seq_r += '-'
             cpt_g += 1
             seq_o += ' '
-        else :
+        elif op[i] == DEL :
             seq_g += '-'
             seq_r += read[cpt_r]
             cpt_r += 1
             seq_o += ' '
+        else :
+            print "error print"
     print seq_g+'\n', seq_o+'\n', seq_r+'\n'
 
 if __name__ == "__main__" :
@@ -120,8 +142,9 @@ if __name__ == "__main__" :
 
     v = 'tgggatggatcaaccctaacagtggtggcacaaactatgcacagaagtttcagggcagggtcaccatgaccagggacacgtccatcagcacagcctacatggagctgagcaggctgagatctgacgacacggccgtgtattactgtgcgagaga'
     u = 'ttgcacgcattgattgggatgatgataaatactacagcacatctctgaagaccaggctcaccatctccaaggacacctccaaaaaccaggtggtccttacaatgaccaacatggaccctgtggacacggccgtgtattactg'
-    matrix, len_read, len_gen = init(u,v)
+    matrix, len_read, len_gen, read, genome = init(u,v,5)
     print matrix
-    op = backtrap(matrix, len_read, len_gen)
+    op = backtrap(matrix, len_read, len_gen, read, genome)
     print_result(op, v, u)
+
 
