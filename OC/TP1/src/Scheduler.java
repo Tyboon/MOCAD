@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Scheduler {
 	
-	public ArrayList<int[]> random_instance(int[][] jobs) {
+	public static ArrayList<int[]> RDM(int[][] jobs) {
 		Random rand = new Random();
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		boolean[] bool = new boolean[125];
@@ -21,7 +21,7 @@ public class Scheduler {
 		return list;
 	}
 	
-	public ArrayList<int[]> EDD (int[][] jobs) {
+	public static ArrayList<int[]> EDD (int[][] jobs) {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		Arrays.sort(jobs, new Comparator<int[]>() {
 		    public int compare(int[] s1, int[] s2) {
@@ -36,7 +36,7 @@ public class Scheduler {
 	
 	int comp = 0;
 	
-	public ArrayList<int[]> MDD (int[][] jobs) {
+	public static ArrayList<int[]> MDD (int[][] jobs) {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		int min = Integer.MAX_VALUE;
 		int ind = -1;
@@ -58,9 +58,24 @@ public class Scheduler {
 			list.add(jobs[ind]);
 			compl += jobs[ind][0];
 		}
-		
 		return list;
 	}
+	
+	public static ArrayList<int[]> schedule(int[][] jobs, String scheduler) {
+		switch (scheduler) {
+		case "RDM" : 
+			return RDM(jobs);
+		case "EDD" :
+			return EDD(jobs);
+		case "MDD" :
+			return MDD(jobs);
+		default :
+			System.out.println("Error : Unknow scheduler");
+			System.exit(0);
+		}
+		return null;
+	}
+	
 	
 	public static int cost(ArrayList<int[]> list) {
 		int compl = 0;
