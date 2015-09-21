@@ -62,7 +62,7 @@ public class Scheduler {
 		return list;
 	}
 	
-	public int cost(ArrayList<int[]> list) {
+	public static int cost(ArrayList<int[]> list) {
 		int compl = 0;
 		int cost = 0;
 		int[] tmp = null;
