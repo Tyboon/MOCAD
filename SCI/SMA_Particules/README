@@ -4,25 +4,28 @@ Emilie Allart
 	RENDU SMA Particules
 	
 	Compilation :
-		*****
+		Depuis le dossier src/ lancer : javac -c *.java
 		
 	Lancement :
-		*****
+		Depus le dossier src/ lancer : java Simulation run nb sleep l h px
+		
+		ex : java Simulation 500 100 80 20 20 5
 		
 	Paramètres :
-		* int Longueur
-		* int Largeur
-		* int Taille_bille
-		* int Nb_bille
-		* int Ralentissement
-		* bool Torique : 
+		* h : int Hauteur de la fenêtre
+		* l : int Largeur de la fenêtre 
+		* nb : int nombre de billes 
+		* speed :int Ralentissement
+		* run : int nombre de tour
+		* px : int taille d'un pixel
+
 		
 	Argumentation :
 		
 		* Utilisation de variables discrètes pour une question de rapidité (éviter de parcourir tous les agents pour savoir s'ils sont voisins)
-		* Torique ou non.
-		* En cas de collision des agents, changement de direction.
-		* 
+		* En cas de collision des agents, la première Bille qui "s'en rend compte" change de direction à son opposé. Si la place vers laquelle elle va est également prise, on fait un random sur les 7 positions si une d'elle est libre, sinon on ne fait rien avant le prochain tour.
+		* La prochaine étapre serait de faire un mode torique. 
+		  Dans notre cas, les billes rebondissent sur les parois avec les mêmes conditions que pour une collision.
+		* On peut régler la taille des pixels pour mieux analyser les déplacements.
+		* Utilisation de carré plutôt que des cercles, car cela lague trop sinon
 		
-		
-SEE : Conserver pasX et pasY dans Bille ou créer enum SENS

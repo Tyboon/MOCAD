@@ -1,45 +1,28 @@
+package agent;
+
 import java.awt.Color;
 import java.util.Random;
 
+import utils.Environnement;
 
-public class Bille {
+public class Bille extends Agent {
 
-	//private Sens sens;
-	private int x;
-	private int y;
-	private int pasX;
-	private int pasY;
-	private Color color; 
-	private Environnement env;
+	private Color color;
 	
 	public Bille(Environnement env) {
-		
-		this.env = env;
-		Random rand = new Random();
+		super(env);
 		int r = (int) (Math.random()*255);
 		int g = (int) (Math.random()*255);
 		int b = (int) (Math.random()*255);
 		this.color = new Color(r,g,b);
-		
-		// VERIFIER SI NON COLLISION
-		int tmp1 = rand.nextInt(env.getEnv().length-1);
-		int tmp2 = rand.nextInt(env.getEnv()[0].length-1);
-		
-		while (env.getEnv()[tmp1][tmp2] != null) {
-			tmp1 = rand.nextInt(env.getEnv().length-1);
-			tmp2 = rand.nextInt(env.getEnv()[0].length-1);
-		}
-		
-		this.x = tmp1;
-		this.y = tmp2;
-		
-		this.pasX = rand.nextInt(3)-1; // -1, 0 ou 1
-		this.pasY = rand.nextInt(3)-1;
-		
 	}
 	
-	public void decide() {
-		Bille[][] tab = this.env.getEnv();
+	public Color getColor(){
+		return this.color;
+	}
+
+	public void decide() { //TODO eclaircir
+		Bille[][] tab = (Bille[][]) this.env.getEnv();
 		int x_fut = this.x + this.pasX;
 		int y_fut = this.y + this.pasY;
 		int cpt = 1;
@@ -65,18 +48,18 @@ public class Bille {
 				}
 				// Si on a trouvé une case libre
 				if ((cpt < 8) && (x_fut <= tab.length-1) && (y_fut <= tab[0].length-1) && (0 <= x_fut) && (0 <= y_fut) && (env.getEnv()[x_fut][y_fut] != null)) { 
-					this.env.deleteBille(this.x, this.y);
+					this.env.deleteAgent(this.x, this.y);
 					this.x = x_fut;
 					this.y = y_fut;
-					this.env.putBille(this, this.x, this.y);
+					this.env.putAgent(this, this.x, this.y);
 				}
 			} else {
 				
 				// Sinon va à la place libre
-				this.env.deleteBille(this.x, this.y);
+				this.env.deleteAgent(this.x, this.y);
 				this.x = x_fut;
 				this.y = y_fut;
-				this.env.putBille(this, this.x, this.y);
+				this.env.putAgent(this, this.x, this.y);
 			}
 			
 		} else {
@@ -94,24 +77,12 @@ public class Bille {
 			}
 			// Si on a trouvé une case libre
 			if ((cpt < 8) && (x_fut <= tab.length-1) && (y_fut <= tab[0].length-1) && (0 <= x_fut) && (0 <= y_fut) && (env.getEnv()[x_fut][y_fut] != null)) { 
-				this.env.deleteBille(this.x, this.y);
+				this.env.deleteAgent(this.x, this.y);
 				this.x = x_fut;
 				this.y = y_fut;
-				this.env.putBille(this, this.x, this.y);
+				this.env.putAgent(this, this.x, this.y);
 			}
 		}
-		
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public Color getColor() {
-		return color;
-	}
 }

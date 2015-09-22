@@ -7,17 +7,19 @@ public class Simulation {
 	private static int sleepT;
 	private static int L;
 	private static int l;
+	private static int px;
 
 	public static void main(String[] args) throws InterruptedException {
-		nbRun = 500;
-		nbAgent = 10;
-		sleepT = 80;
-		L = 20;
-		l = 20;
+		nbRun = Integer.parseInt(args[0]); //500
+		nbAgent = Integer.parseInt(args[1]); //100
+		sleepT = Integer.parseInt(args[2]); //80
+		L = Integer.parseInt(args[3]); //20
+		l = Integer.parseInt(args[4]); //20
+		px = Integer.parseInt(args[5]);
 
 		SMA sma = new SMA();
 		JFrame jframe = new JFrame();
-		Panel p = new Panel(sma, L, l, 10);
+		Panel p = new Panel(sma, L, l, px);
 		
 		jframe.add(p);
 		jframe.pack();
