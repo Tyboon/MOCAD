@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.Random;
 
 
@@ -8,15 +9,13 @@ public class Bille {
 	private int y;
 	private int pasX;
 	private int pasY;
+	private Color color = Color.BLUE; 
 	private Environnement env;
 	
 	public Bille(Environnement env) {
 		
 		this.env = env;
 		Random rand = new Random();
-		Bille[][] tab = env.getEnv();
-		//int d = new Random().nextInt(Sens.values().length);
-		//this.sens = Sens.values()[d];
 		
 		// VERIFIER SI NON COLLISION
 		int tmp1 = rand.nextInt(env.getEnv().length);
@@ -44,7 +43,7 @@ public class Bille {
 		
 		// Si on est dans le cadre
 		if ((x_fut <= tab.length-1) && (y_fut <= tab[0].length-1) && (0 <= x_fut) && (0 <= y_fut)) { 
-			System.out.println(x_fut + " - " + y_fut);
+//			System.out.println(x_fut + " - " + y_fut);
 			// Si on rencontre un autre agent
 			if (tab[x_fut][y_fut] != null) {
 				// Partir dans le sens opposé si libre sinon rdm sur les cases libres
@@ -98,5 +97,17 @@ public class Bille {
 			}
 		}
 		
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public Color getColor() {
+		return color;
 	}
 }

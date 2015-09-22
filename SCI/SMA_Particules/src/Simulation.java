@@ -1,3 +1,4 @@
+import javax.swing.JFrame;
 
 public class Simulation {
 
@@ -6,21 +7,29 @@ public class Simulation {
 	private static int sleepT;
 	private static int L;
 	private static int l;
-	
-	public static void main (String[] args) throws InterruptedException {
-		nbRun = 5;
-		nbAgent = 4;
-		sleepT = 10;
+
+	public static void main(String[] args) throws InterruptedException {
+		nbRun = 500;
+		nbAgent = 10;
+		sleepT = 80;
 		L = 20;
-		l = 10;
-		
+		l = 20;
+
 		SMA sma = new SMA();
-		Vue vue = new Vue(sma, L, l);
-		sma.init(L, l, nbRun, sleepT, vue);
+		JFrame jframe = new JFrame();
+		Panel p = new Panel(sma, L, l, 10);
 		
-		for (int i =0; i < nbAgent; i++) {
+		jframe.add(p);
+		jframe.pack();
+		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jframe.setLocationRelativeTo(null);
+		jframe.setVisible(true);
+		
+		sma.init(L, l, nbRun, sleepT, p);
+
+		for (int i = 0; i < nbAgent; i++) {
 			sma.add(new Bille(sma.getEnv()));
-			System.out.println("Add bowls");
+//			System.out.println("Add bowls");
 		}
 		System.out.println("RUN");
 		sma.run();
