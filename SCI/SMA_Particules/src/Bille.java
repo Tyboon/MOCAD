@@ -9,13 +9,10 @@ public class Bille {
 	private int pasX;
 	private int pasY;
 	private Environnement env;
-	private int[] sens = new int[2];
 	
-	public Bille() {
+	public Bille(Environnement env) {
 		
-		this.sens[0] = -1;
-		this.sens[1] = 1;
-		
+		this.env = env;
 		Random rand = new Random();
 		Bille[][] tab = env.getEnv();
 		//int d = new Random().nextInt(Sens.values().length);
@@ -33,25 +30,44 @@ public class Bille {
 		this.x = tmp1;
 		this.y = tmp2;
 		
-		this.pasX = this.sens[rand.nextInt(1)];
-		this.pasY = this.sens[rand.nextInt(1)];
+		this.pasX = rand.nextInt(3)-1; // -1, 0 ou 1
+		this.pasY = rand.nextInt(3)-1;
 		
 	}
 	
 	public void decide() {
-		Bille[][] tab = env.getEnv();
+		Bille[][] tab = this.env.getEnv();
 		int x_fut = this.x + this.pasX;
 		int y_fut = this.y + this.pasY;
 		int cpt = 1;
 		Random rand = new Random();
 		
 		// Si on est dans le cadre
-		if ((x_fut < tab.length) && (y_fut < tab[0].length)) { 
-			
+		if ((x_fut <= tab.length-1) && (y_fut <= tab[0].length-1) && (0 <= x_fut) && (0 <= y_fut)) { 
+			System.out.println(x_fut + " - " + y_fut);
 			// Si on rencontre un autre agent
 			if (tab[x_fut][y_fut] != null) {
 				// Partir dans le sens opposé si libre sinon rdm sur les cases libres
-			}else {
+				this.pasX = this.pasX * (-1);
+				this.pasY = this.pasY * (-1);
+				x_fut = this.x + this.pasX;
+				y_fut = this.y + this.pasY;
+				
+				while ((x_fut <= tab.length-1) && (y_fut <= tab[0].length-1)&& (0 <= x_fut) && (0 <= y_fut) && (env.getEnv()[x_fut][y_fut] != null)) {
+					this.pasX = rand.nextInt(3)-1;
+					this.pasY = rand.nextInt(3)-1;
+					x_fut = this.x + this.pasX;
+					y_fut = this.y + this.pasY;
+					cpt++;
+				}
+				// Si on a trouvé une case libre
+				if (cpt != 8) { 
+					this.env.deleteBille(this.x, this.y);
+					this.x = x_fut;
+					this.y = y_fut;
+					this.env.putBille(this, this.x, this.y);
+				}
+			} else {
 				
 				// Sinon va à la place libre
 				this.env.deleteBille(this.x, this.y);
@@ -66,9 +82,9 @@ public class Bille {
 			x_fut = this.x + this.pasX;
 			y_fut = this.y + this.pasY;
 			
-			while ((x_fut < tab.length) && (y_fut < tab[0].length) && (env.getEnv()[x_fut][y_fut] != null)) {
-				this.pasX = this.sens[rand.nextInt(1)];
-				this.pasY = this.sens[rand.nextInt(1)];
+			while ((x_fut <= tab.length-1) && (y_fut <= tab[0].length-1) && (0 <= x_fut) && (0 <= y_fut) && (env.getEnv()[x_fut][y_fut] != null)) {
+				this.pasX = rand.nextInt(3)-1;
+				this.pasY = rand.nextInt(3)-1;
 				x_fut = this.x + this.pasX;
 				y_fut = this.y + this.pasY;
 				cpt++;
