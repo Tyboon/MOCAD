@@ -34,7 +34,6 @@ public class Scheduler {
 		return list;
 	}
 	
-	int comp = 0;
 	
 	public static ArrayList<int[]> MDD (int[][] jobs) {
 		ArrayList<int[]> list = new ArrayList<int[]>();
@@ -86,7 +85,7 @@ public class Scheduler {
 		for (int i = 0; i <list.size(); i++) {
 			tmp = list.get(i);
 			compl += tmp[0];
-			T = Math.max(compl-tmp[2], 0);
+			T = Math.max((compl-tmp[2]), 0);
 			cost += T * tmp[1];
 		}
 		return cost;

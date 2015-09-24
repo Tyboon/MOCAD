@@ -6,23 +6,23 @@ public class Main {
 	public static void main(String[] args) {
 		Parser parser = new Parser();
 		Instance[] instances = parser.parse("wt100.txt", 100) ;
-		//ArrayList<ArrayList<int[]>> list = null;
-		ArrayList<int[]> tmp = null;
-		//ArrayList<Integer> cost = new ArrayList<Integer>();
-		HillClimbing hillC = new HillClimbing("INSERT", false, "RDM");
-		//int i = 0; 
+		ArrayList<ArrayList<int[]>> list = new ArrayList<ArrayList<int[]>>();
+		ArrayList<int[]> tmp = new ArrayList<int[]>();
+		ArrayList<Integer> cost = new ArrayList<Integer>();
+		HillClimbing hillC = new HillClimbing("SWAP", false, "EDD");
+		int i = 0; 
 		
-		/*
+		
 		for (Instance inst : instances) {
 			tmp = hillC.launch(inst);
 			list.add(tmp);
 			cost.add(Scheduler.cost(tmp));
-			System.out.println("i : " + Scheduler.cost(tmp));
+			System.out.println("i : " + i );
 			i++;
-		} */
-		tmp = hillC.launch(instances[0]);
-		System.out.println("COST ");
-		System.out.println("Result : "+ Scheduler.cost(tmp));
+		} 
+		
+//		ArrayList<int[]> tmp = hillC.launch(instances[1]);
+//		System.out.println("Result : "+ Scheduler.cost(tmp));
 	}
 }
 

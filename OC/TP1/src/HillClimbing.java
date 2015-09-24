@@ -13,26 +13,26 @@ public class HillClimbing {
 		this.init = ini;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ArrayList<int[]> launch (Instance inst) {
 		// INIT
-		System.out.println("INIT");
 		ArrayList<int[]> jobs = Scheduler.schedule(inst.jobs, this.init);
 		boolean progress = true;
 		int cost = Scheduler.cost(jobs);
-		int cost_t = Integer.MAX_VALUE;
+		int cost_t = 0;
 		ArrayList<int[]> tmp = null;
-		
 		
 		while (progress) {
 		// BOUCLE TANT QUE MEILLEUR
 			tmp = Selector.select(jobs, neighbor, this.best);
-			System.out.println("WHILE");
 			cost_t = Scheduler.cost(tmp);
+			
 			if (cost_t < cost) {
 				cost = cost_t;
-				jobs = tmp;
-			} else
+				jobs = (ArrayList<int[]>) tmp.clone();
+			} else {
 				progress = false;
+			}
 		}
 		return jobs;
 	}
