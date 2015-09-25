@@ -3,9 +3,8 @@ import java.util.ArrayList;
 
 public class Neighbor {
 
-	@SuppressWarnings("unchecked")
 	public static ArrayList<int[]> insert (ArrayList<int[]> job, int j, int k) {
-		ArrayList<int[]> jobs = (ArrayList<int[]>) job.clone();
+		ArrayList<int[]> jobs = new ArrayList<int[]>(job);
 		int[] tmp = jobs.get(j);
 		for (int i =k; i<j; i++) {
 			jobs.set(i+1,jobs.get(i));
@@ -15,18 +14,16 @@ public class Neighbor {
 		return jobs;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static ArrayList<int[]> swap(ArrayList<int[]> job, int j, int k) {
-		ArrayList<int[]> jobs = (ArrayList<int[]>) job.clone();
+		ArrayList<int[]> jobs = new ArrayList<int[]>(job);
 		int[] tmp = jobs.get(j);
 		jobs.set(j,jobs.get(k));
 		jobs.set(k,tmp);
 		return jobs;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static ArrayList<int[]> exchange(ArrayList<int[]> job, int j, int k) {
-		ArrayList<int[]> jobs = (ArrayList<int[]>) job.clone();
+		ArrayList<int[]> jobs = new ArrayList<int[]>(job);
 		int[] tmp = null;
 		for (int i = 0; i<(k-j)/2; i++) {
 			tmp = jobs.get(j+i);

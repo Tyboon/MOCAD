@@ -3,9 +3,8 @@ import java.util.ArrayList;
 
 public class Selector {
 
-	@SuppressWarnings("unchecked")
 	public static ArrayList<int[]> select_first(ArrayList<int[]> jobs, String neighbor) {
-		ArrayList<int[]> tmp = (ArrayList<int[]>) jobs.clone();
+		ArrayList<int[]> tmp = new ArrayList<int[]>(jobs);
 		int cost = Scheduler.cost(jobs);
 		int jobs_size = jobs.size();
 		
@@ -21,9 +20,8 @@ public class Selector {
 		return tmp;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static ArrayList<int[]> select_best(ArrayList<int[]> jobs, String neighbor) {
-		ArrayList<int[]> tmp = (ArrayList<int[]>) jobs.clone();
+		ArrayList<int[]> tmp = new ArrayList<int[]>(jobs);
 		int cost = Scheduler.cost(jobs);
 		ArrayList<int[]> var = null;
 		int cost_var = (Integer) null;

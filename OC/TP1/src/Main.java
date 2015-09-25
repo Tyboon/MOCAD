@@ -10,17 +10,19 @@ public class Main {
 		ArrayList<int[]> tmp = new ArrayList<int[]>();
 		ArrayList<Integer> cost = new ArrayList<Integer>();
 		HillClimbing hillC = new HillClimbing("SWAP", false, "EDD");
-		int i = 0; 
+//		int i = 0; 
+		long t0 = System.currentTimeMillis();
 		
 		
 		for (Instance inst : instances) {
+//			t = System.currentTimeMillis();
 			tmp = hillC.launch(inst);
 			list.add(tmp);
 			cost.add(Scheduler.cost(tmp));
-			System.out.println("i : " + i );
-			i++;
+//			System.out.println("i : " + i + " " + (System.currentTimeMillis()-t) );
+//			i++;
 		} 
-		
+		System.out.println(System.currentTimeMillis() - t0);
 //		ArrayList<int[]> tmp = hillC.launch(instances[1]);
 //		System.out.println("Result : "+ Scheduler.cost(tmp));
 	}

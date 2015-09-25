@@ -13,7 +13,6 @@ public class HillClimbing {
 		this.init = ini;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public ArrayList<int[]> launch (Instance inst) {
 		// INIT
 		ArrayList<int[]> jobs = Scheduler.schedule(inst.jobs, this.init);
@@ -29,7 +28,7 @@ public class HillClimbing {
 			
 			if (cost_t < cost) {
 				cost = cost_t;
-				jobs = (ArrayList<int[]>) tmp.clone();
+				jobs = new ArrayList<int[]>(tmp);
 			} else {
 				progress = false;
 			}
