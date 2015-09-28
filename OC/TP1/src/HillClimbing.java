@@ -15,11 +15,12 @@ public class HillClimbing {
 	
 	public ArrayList<int[]> launch (Instance inst) {
 		// INIT
-		ArrayList<int[]> jobs = Scheduler.schedule(inst.jobs, this.init);
+//		ArrayList<int[]> jobs = Scheduler.schedule(inst.jobs, this.init);
+		ArrayList<int[]> jobs = Scheduler.EDD(inst.jobs);
 		boolean progress = true;
 		int cost = Scheduler.cost(jobs);
 		int cost_t = 0;
-		ArrayList<int[]> tmp = null;
+		ArrayList<int[]> tmp = new ArrayList<int[]>();
 		
 		while (progress) {
 		// BOUCLE TANT QUE MEILLEUR

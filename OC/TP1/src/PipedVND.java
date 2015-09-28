@@ -31,7 +31,7 @@ public class PipedVND {
 				cost = cost_t;
 				jobs = new ArrayList<int[]>(tmp);
 				j = 0;
-				//i = (i++)%3; //?
+				i = (i++)%3; //?
 			} else {
 				i = (i++)%3; // ou rdm ? 
 				j++;

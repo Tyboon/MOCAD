@@ -81,7 +81,6 @@ public class Scheduler {
 		int cost = 0;
 		int[] tmp = null;
 		int T = 0;
-		
 		for (int i = 0; i <list.size(); i++) {
 			tmp = list.get(i);
 			compl += tmp[0];

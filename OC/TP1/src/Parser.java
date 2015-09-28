@@ -24,13 +24,17 @@ public class Parser {
 			instances[inst] = new Instance(nb_jobs);
 			
 			while (((line = br.readLine())!=null) && (cpt < nb_jobs*3*125)) {
+			// TQ : pas en fin de fichier 
 				
+				// cast la ligne
 				line = line.replaceAll(" +", " ").trim();				
 				tmp = line.split(" ");
 				
 				for (int i = 0; i< tmp.length; i++) {
+				// FOR : chaque valeur
 					
 					if ((cpt%nb_jobs) != 0 && (inst <= 124)) { // cas interne d'un paramètre
+					// SI : Dans une instance 
 						switch (param) {
 							case 0 : 
 								instances[inst].add_process(cpt%nb_jobs, Integer.parseInt(tmp[i]));

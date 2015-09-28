@@ -24,7 +24,7 @@ public class Selector {
 		ArrayList<int[]> tmp = new ArrayList<int[]>(jobs);
 		int cost = Scheduler.cost(jobs);
 		ArrayList<int[]> var = null;
-		int cost_var = (Integer) null;
+		int cost_var = Integer.MAX_VALUE;
 		for (int i =1; i<jobs.size(); i++) {
 			for (int j=0; j<jobs.size(); j++) {
 				var = Neighbor.select(jobs,i,j,neighbor);

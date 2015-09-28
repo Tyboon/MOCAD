@@ -8,7 +8,6 @@ public class Neighbor {
 		int[] tmp = jobs.get(j);
 		for (int i =k; i<j; i++) {
 			jobs.set(i+1,jobs.get(i));
-			System.out.println("Sel" + i + j);
 		}
 		jobs.set(k,tmp);
 		return jobs;
