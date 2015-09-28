@@ -17,12 +17,12 @@ public class PipedVND {
 	public ArrayList<int[]> launch (Instance inst) {
 		// INIT
 		ArrayList<int[]> jobs = Scheduler.schedule(inst.jobs, this.init);
-		int i = 0;
+		int i = 0, j = 0;
 		int cost = Scheduler.cost(jobs);
 		int cost_t = 0;
 		ArrayList<int[]> tmp = null;
 		
-		while (i < k) {
+		while (j < k) {
 			// faire un rdm sur i et ajouter un compteur
 			tmp = Selector.select(jobs, neighbor[i], this.best);
 			cost_t = Scheduler.cost(tmp);
@@ -30,8 +30,11 @@ public class PipedVND {
 			if (cost_t < cost) {
 				cost = cost_t;
 				jobs = new ArrayList<int[]>(tmp);
+				j = 0;
+				//i = (i++)%3; //?
 			} else {
-				i++;
+				i = (i++)%3; // ou rdm ? 
+				j++;
 			}
 		}
 		return jobs;

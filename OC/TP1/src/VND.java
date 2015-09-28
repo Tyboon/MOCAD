@@ -29,6 +29,7 @@ public class VND {
 			if (cost_t < cost) {
 				cost = cost_t;
 				jobs = new ArrayList<int[]>(tmp);
+				i = 0;
 			} else {
 				i++;
 			}
