@@ -1,0 +1,17 @@
+Preparation :
+    - t = table des suffixes de genome
+    - bwt de genome à partir de t
+    - rank
+    - table d'échantillonage ttes les S positions
+    
+Pour chaque graine du read (taille s > log(n) ~ 15-20): 
+    - chercher les occurences : 
+        - sans erreur
+        - avec erreurs : 
+            - remontée de BWT
+            - casier à pigeon
+    - faire les extensions avec k-erreurs
+
+DONE :
+    - indexation :
+       TS 

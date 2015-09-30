@@ -3,7 +3,10 @@ from sklearn import linear_model
 import numpy as np
 import matplotlib.pyplot as plt
 
-x,y = np.loadtxt("test.txt", unpack='true')
+# Faire la cross_val et le scoring 
+
+x = np.loadtxt('x1.txt')
+y = np.loadtxt('y1.txt')
 
 plt.scatter(x,y)
 
