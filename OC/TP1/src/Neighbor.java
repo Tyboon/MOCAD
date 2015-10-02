@@ -1,16 +1,28 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Neighbor {
 
 	public static ArrayList<int[]> insert (ArrayList<int[]> job, int j, int k) {
 		ArrayList<int[]> jobs = new ArrayList<int[]>(job);
-		int[] tmp = jobs.get(j);
-		for (int i =k; i<j; i++) {
-			jobs.set(i+1,jobs.get(i));
+		ArrayList<int[]> fin = new ArrayList<int[]>();
+		int i = 0;
+		int[] tmp = Arrays.copyOf(jobs.get(j), 3);
+		if (k < j) {
+			for (; i < k; i++) fin.add(jobs.get(i));
+			fin.add(tmp);
+			for (i = k+1; i < j; i++) fin.add(jobs.get(i));
+			for (i = j+1; i < jobs.size(); i++) fin.add(jobs.get(i));
+		} else if (k != j){
+			for (; i < j; i++) fin.add(jobs.get(i));
+			for (i = j+1; i < k; i++) fin.add(jobs.get(i));
+			fin.add(tmp);
+			for (i = k+1; i < jobs.size(); i++) fin.add(jobs.get(i));
+		} else {
+			return jobs;
 		}
-		jobs.set(k,tmp);
-		return jobs;
+		return fin;
 	}
 	
 	public static ArrayList<int[]> swap(ArrayList<int[]> job, int j, int k) {

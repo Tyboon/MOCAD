@@ -17,6 +17,7 @@ public class HillClimbing {
 		// INIT
 //		ArrayList<int[]> jobs = Scheduler.schedule(inst.jobs, this.init);
 		ArrayList<int[]> jobs = Scheduler.EDD(inst.jobs);
+		
 		boolean progress = true;
 		int cost = Scheduler.cost(jobs);
 		int cost_t = 0;
@@ -26,7 +27,6 @@ public class HillClimbing {
 		// BOUCLE TANT QUE MEILLEUR
 			tmp = Selector.select(jobs, neighbor, this.best);
 			cost_t = Scheduler.cost(tmp);
-			
 			if (cost_t < cost) {
 				cost = cost_t;
 				jobs = new ArrayList<int[]>(tmp);

@@ -19,19 +19,19 @@ public class Parser {
 			
 			int cpt = 0;
 			int param = 0; //0 = j, 1 = w, 2 = d 
-			int inst = 0;
+			int inst = 0, i = 0;
 			String[] tmp = null; 
 			instances[inst] = new Instance(nb_jobs);
 			
-			while (((line = br.readLine())!=null) && (cpt < nb_jobs*3*125)) {
+			while (((line = br.readLine()) != null) && (cpt < nb_jobs*3*125)) {
 			// TQ : pas en fin de fichier 
 				
 				// cast la ligne
 				line = line.replaceAll(" +", " ").trim();				
 				tmp = line.split(" ");
 				
-				for (int i = 0; i< tmp.length; i++) {
-				// FOR : chaque valeur
+				for ( i = 0; i< tmp.length; i++) {
+				// FOR : chaque valeur de la string
 					
 					if ((cpt%nb_jobs) != 0 && (inst <= 124)) { // cas interne d'un paramètre
 					// SI : Dans une instance 
@@ -51,6 +51,7 @@ public class Parser {
 						}
 						
 					} else if ((cpt%(nb_jobs*3) == 0) && (inst < 124)) { // cas : nouvelle instance sauf à la dernière ligne
+						param = 0;
 						instances[++inst] = new Instance(nb_jobs);
 						instances[inst].add_process(cpt%nb_jobs, Integer.parseInt(tmp[i]));
 					} else { // cas : changement paramètre
@@ -68,7 +69,7 @@ public class Parser {
 						default :
 							System.out.println("Error : invalid parameter index");
 							System.exit(0);
-					}
+						}
 					}
 					cpt++;
 				}

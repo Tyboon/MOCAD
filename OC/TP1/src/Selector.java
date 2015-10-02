@@ -23,10 +23,11 @@ public class Selector {
 	public static ArrayList<int[]> select_best(ArrayList<int[]> jobs, String neighbor) {
 		ArrayList<int[]> tmp = new ArrayList<int[]>(jobs);
 		int cost = Scheduler.cost(jobs);
-		ArrayList<int[]> var = null;
+		ArrayList<int[]> var = new ArrayList<int[]>();
 		int cost_var = Integer.MAX_VALUE;
-		for (int i =1; i<jobs.size(); i++) {
+		for (int i =0; i<jobs.size(); i++) {
 			for (int j=0; j<jobs.size(); j++) {
+				System.out.println(cost +"  " + cost_var);	//PRINT
 				var = Neighbor.select(jobs,i,j,neighbor);
 				cost_var = Scheduler.cost(var);
 				if (cost_var < cost){

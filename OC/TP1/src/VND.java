@@ -11,6 +11,7 @@ public class VND {
 		this.neighbor = neigth;
 		this.best = best;
 		this.init = ini;
+		this.k = neighbor.length;
 	}
 	
 	public ArrayList<int[]> launch (Instance inst) {
@@ -22,7 +23,6 @@ public class VND {
 		ArrayList<int[]> tmp = null;
 		
 		while (i < k) {
-
 			tmp = Selector.select(jobs, neighbor[i], this.best);
 			cost_t = Scheduler.cost(tmp);
 			
