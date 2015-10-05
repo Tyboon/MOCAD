@@ -6,8 +6,6 @@ import java.util.Random;
 import utils.Environnement;
 
 public class Bille extends Agent {
-
-	private Color color;
 	
 	public Bille(Environnement env) {
 		super(env);

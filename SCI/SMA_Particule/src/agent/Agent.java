@@ -1,5 +1,6 @@
 package agent;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,6 +14,7 @@ public abstract class Agent {
 	protected int pasX;
 	protected int pasY;
 	protected Environnement env;
+	protected Color color;
 	
 	
 	public Agent(Environnement env) {
@@ -38,10 +40,23 @@ public abstract class Agent {
 	}
 
 	
+	public int getPasX() {
+		return pasX;
+	}
+
+
+	public int getPasY() {
+		return pasY;
+	}
+
+
 	public int getY() {
 		return y;
 	}
 	
+	public Color getColor() {
+		return this.color;
+	}
 	
 	public abstract void decide() ;
 

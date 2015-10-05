@@ -28,6 +28,10 @@ public class SMA extends Thread {
 	public void add(Agent a) {
 		this.agents.add(a);
 	}
+	
+	public void remove(Agent a) {
+		this.agents.remove(a);
+	}
 
 	public Environnement getEnv() {
 		return this.env;
