@@ -27,7 +27,7 @@ public class Selector {
 		int cost_var = Integer.MAX_VALUE;
 		for (int i =0; i<jobs.size(); i++) {
 			for (int j=0; j<jobs.size(); j++) {
-				System.out.println(cost +"  " + cost_var);	//PRINT
+//				System.out.println(cost +"  " + cost_var);	//PRINT
 				var = Neighbor.select(jobs,i,j,neighbor);
 				cost_var = Scheduler.cost(var);
 				if (cost_var < cost){

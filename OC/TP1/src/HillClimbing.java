@@ -15,8 +15,7 @@ public class HillClimbing {
 	
 	public ArrayList<int[]> launch (Instance inst) {
 		// INIT
-//		ArrayList<int[]> jobs = Scheduler.schedule(inst.jobs, this.init);
-		ArrayList<int[]> jobs = Scheduler.EDD(inst.jobs);
+		ArrayList<int[]> jobs = Scheduler.schedule(inst.jobs, this.init);
 		
 		boolean progress = true;
 		int cost = Scheduler.cost(jobs);

@@ -12,13 +12,13 @@ public class Neighbor {
 		if (k < j) {
 			for (; i < k; i++) fin.add(jobs.get(i));
 			fin.add(tmp);
-			for (i = k+1; i < j; i++) fin.add(jobs.get(i));
+			for (i = k; i < j; i++) fin.add(jobs.get(i));
 			for (i = j+1; i < jobs.size(); i++) fin.add(jobs.get(i));
 		} else if (k != j){
 			for (; i < j; i++) fin.add(jobs.get(i));
 			for (i = j+1; i < k; i++) fin.add(jobs.get(i));
 			fin.add(tmp);
-			for (i = k+1; i < jobs.size(); i++) fin.add(jobs.get(i));
+			for (i = k; i < jobs.size(); i++) fin.add(jobs.get(i));
 		} else {
 			return jobs;
 		}
