@@ -14,6 +14,7 @@ public class SMA extends Thread {
 	private int nbTour;
 	private int ralent;
 	private Panel panel;
+//	private boolean torique;
 
 	public void init(int L, int l, int nb, int r, Panel p) {
 		this.env = new Environnement(l, L);
@@ -21,6 +22,7 @@ public class SMA extends Thread {
 		this.nbTour = nb;
 		this.ralent = r;
 		this.panel = p;
+//		this.torique = tor;
 	}
 
 	public void add(Agent a) {
@@ -39,7 +41,7 @@ public class SMA extends Thread {
 		while (this.nbTour >= 0) {
 			Collections.shuffle(this.agents);
 			for (Agent a: this.agents) {
-				a.decide();
+				a.decide(); // decide(torique)
 			}
 			try {
 				Thread.sleep(this.ralent);

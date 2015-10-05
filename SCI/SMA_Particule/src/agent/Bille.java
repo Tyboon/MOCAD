@@ -22,7 +22,7 @@ public class Bille extends Agent {
 	}
 
 	public void decide() { //TODO eclaircir
-		Bille[][] tab = (Bille[][]) this.env.getEnv();
+		Agent[][] tab = this.env.getEnv();
 		int x_fut = this.x + this.pasX;
 		int y_fut = this.y + this.pasY;
 		int cpt = 1;
@@ -34,12 +34,13 @@ public class Bille extends Agent {
 			// Si on rencontre un autre agent
 			if (tab[x_fut][y_fut] != null) {
 				// Partir dans le sens opposé si libre sinon rdm sur les cases libres
-				this.pasX = this.pasX * (-1);
-				this.pasY = this.pasY * (-1);
+				Bille b = (Bille) tab[x_fut][y_fut] ;
+				this.pasX = b.pasX * (-1);
+				this.pasY = b.pasY * (-1);
 				x_fut = this.x + this.pasX;
 				y_fut = this.y + this.pasY;
 				
-				while ((x_fut <= tab.length-1) && (y_fut <= tab[0].length-1)&& (0 <= x_fut) && (0 <= y_fut) && (env.getEnv()[x_fut][y_fut] != null)) {
+				while ((x_fut <= tab.length-1) && (y_fut <= tab[0].length-1) && (0 <= x_fut) && (0 <= y_fut) && (env.getEnv()[x_fut][y_fut] != null)) {
 					this.pasX = rand.nextInt(3)-1;
 					this.pasY = rand.nextInt(3)-1;
 					x_fut = this.x + this.pasX;
@@ -63,8 +64,10 @@ public class Bille extends Agent {
 			}
 			
 		} else {
-			this.pasX = this.pasX * (-1);
-			this.pasY = this.pasY * (-1);
+			if (this.x == 0 || this.x == tab.length-1)
+				this.pasX = this.pasX * (-1);
+			else
+				this.pasY = this.pasY * (-1);
 			x_fut = this.x + this.pasX;
 			y_fut = this.y + this.pasY;
 			
@@ -84,5 +87,4 @@ public class Bille extends Agent {
 			}
 		}
 	}
-
 }

@@ -1,0 +1,40 @@
+Emilie Allart
+05/10/2015
+
+	RENDU SMA Particule _ Wator
+	
+	*************************************** SMA PArticule ***************************************
+	Compilation :
+		Depuis le dossier src/ lancer : javac -c *.java
+		
+	Lancement :
+		Depus le dossier src/ lancer : java SimulationBille run nb sleep l h px
+		
+		ex : java Simulation 500 100 80 150 100 5
+		
+	Paramètres :
+		* h : int Hauteur de la fenêtre
+		* l : int Largeur de la fenêtre 
+		* nb : int nombre de billes 
+		* sleep :int Ralentissement
+		* run : int nombre de tour
+		* px : int taille d'un pixel
+
+		
+	Argumentation :
+		
+		* Utilisation de variables discrètes pour une question de rapidité (éviter de parcourir tous les agents pour savoir s'ils sont voisins)
+		* En cas de collision des agents, la première Bille qui "s'en rend compte" change de direction à l'opposé de celui qu'elle rencontre. Si la place vers laquelle elle va est également prise, on fait un random sur les 7 positions si une d'elle est libre, sinon on ne fait rien avant le prochain tour.
+		* La prochaine étapre serait de faire un mode torique. 
+		  Dans notre cas, les billes rebondissent sur les parois avec les mêmes conditions que pour une collision.
+		* On peut régler la taille des pixels pour mieux analyser les déplacements.
+		* Utilisation de carré plutôt que des cercles, car cela lague trop sinon
+	
+	Améliorations :
+		
+		* Meilleure gestion des collisions
+		
+	************************************** WATOR ***************************************************************
+	
+	
+	
