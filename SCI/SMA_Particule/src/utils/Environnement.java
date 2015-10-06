@@ -14,15 +14,24 @@ public class Environnement {
 		return env;
 	}
 	public Agent getAgent(int i, int j) {
-		return env[i][j];
+		try {
+			return env[i][j];
+		} catch(IndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 
 	public void setEnv(Agent[][] env) {
 		this.env = env;
 	}
 
-	public void putAgent(Agent a, int i, int j) {
-		this.env[i][j] = a;
+	public boolean putAgent(Agent a, int i, int j) {
+		try {
+			this.env[i][j] = a;
+			return true;
+		} catch(IndexOutOfBoundsException e) {
+			return false;
+		}
 	}
 	
 	public void deleteAgent(int i, int j) {

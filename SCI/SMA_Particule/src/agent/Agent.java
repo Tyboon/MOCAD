@@ -34,6 +34,15 @@ public abstract class Agent {
 		this.pasY = rand.nextInt(3)-1;	
 	}
 	
+public Agent(Environnement env, int x, int y) {
+		
+		this.env = env;
+		Random rand = new Random();
+		this.x = x;
+		this.y = y;
+		this.pasX = rand.nextInt(3)-1; // -1, 0 ou 1
+		this.pasY = rand.nextInt(3)-1;	
+	}
 	
 	public int getX() {
 		return x;

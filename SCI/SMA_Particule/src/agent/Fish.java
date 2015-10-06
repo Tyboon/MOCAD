@@ -20,29 +20,36 @@ public class Fish extends Agent{
 		this.color = Color.BLUE;
 	}
 
-	@SuppressWarnings("null")
+	public Fish(Environnement env, SMA sma, int birthFish, int x, int y) {
+		super(env, x, y);
+		this.birth = birthFish;
+		this.sma = sma;
+		this.color = Color.BLUE;
+	}
+	
 	public void decide() {
 		ArrayList<Agent> neighbor = (ArrayList<Agent>) getNeighbor();
 		Agent[][] tab = this.env.getEnv();
 		Random rand = new Random();
 		int x_fut = this.x + this.pasX;
 		int y_fut = this.y + this.pasY;
-		Shark shark = null;
+		int x_born, y_born;
+		
 		
 		// Si on est dans le cadre
-		if ((x_fut <= tab.length-1) && (y_fut <= tab[0].length-1) && (0 <= x_fut) && (0 <= y_fut)) { 
-			
-			// S'il n'y a pas de requin
-			if ((shark = containsShark(neighbor)) != null) {
-				// S'il y a un poisson à l'emplacement souhaité
-				if (tab[x_fut][y_fut] != null) {
-					x_fut = this.x;
-					y_fut = this.y;
+		if ((this.x < tab.length-1) && (this.y < tab[0].length-1) && (0 < this.x) && (0 < this.y)) { 
+			if (neighbor.size() < 8) {
+				x_fut = this.x + this.getPasX()*(-1);
+				y_fut = this.y + this.getPasY()*(-1);
+				while ((x_fut > tab.length-1) || (y_fut > tab[0].length-1) || (0 > x_fut) || (0 > y_fut) || (env.getEnv()[x_fut][y_fut] != null)) {
+					this.pasX = rand.nextInt(3)-1;
+					this.pasY = rand.nextInt(3)-1;
+					x_fut = this.x + this.pasX;
+					y_fut = this.y + this.pasY;
 				}
 			} else {
-			//S'il y a un requin
-				x_fut = this.x + (shark.getPasX()*(-1));
-				y_fut = this.y + (shark.getPasY()*(-1));
+					x_fut = this.x;
+					y_fut = this.y;
 			}
 		} else {
 		// Si on dépasse le cadre
@@ -52,33 +59,47 @@ public class Fish extends Agent{
 				this.pasY = this.pasY * (-1);
 			x_fut = this.x + this.pasX;
 			y_fut = this.y + this.pasY;
-			
-			while ((x_fut <= tab.length-1) && (y_fut <= tab[0].length-1) && (0 <= x_fut) && (0 <= y_fut) && (env.getEnv()[x_fut][y_fut] != null)) {
+			int cpt = 0;
+			while (((x_fut > tab.length-1) || (y_fut > tab[0].length-1) || (0 > x_fut) || (0 > y_fut) || (env.getEnv()[x_fut][y_fut] != null)) && (cpt < 5)) {
 				this.pasX = rand.nextInt(3)-1;
 				this.pasY = rand.nextInt(3)-1;
 				x_fut = this.x + this.pasX;
 				y_fut = this.y + this.pasY;
+				cpt++;
+			}
+			if ((x_fut > tab.length-1) || (y_fut > tab[0].length-1) || (0 > x_fut) || (0 > y_fut) || (env.getEnv()[x_fut][y_fut] != null)) {
+				x_fut = this.x;
+				y_fut = this.y;
 			}
 		}
 		
-		this.env.deleteAgent(this.x, this.y);
-		this.x = x_fut;
-		this.y = y_fut ;
-		this.cpt_birth++;
-		this.env.putAgent(this, this.x, this.y);
-		if (this.cpt_birth == this.birth) {
-			this.sma.add(new Fish(env, this.sma, this.birth));
+		if (this.cpt_birth >= this.birth && (this.x != x_fut && this.y != y_fut)) {
+			x_born = this.x;
+			y_born = this.y;
+			
+			this.x = x_fut;
+			this.y = y_fut;
+			this.env.putAgent(this, this.x, this.y);
+			this.env.deleteAgent(x_born, y_born);
+			
+			// Donne naissance
+			Fish f = new Fish(env, this.sma, this.birth, x_born, y_born);
+			this.sma.add(f);
+			this.env.putAgent(f, x_born, y_born);
+			this.sma.nbFish++;
 			this.cpt_birth = 0;
 		}
+		this.cpt_birth++;
 	}
 
-	private Shark containsShark(ArrayList<Agent> neighbor) {
-		for (Agent agent : neighbor) {
-			if (agent instanceof Shark) {
-				return (Shark) agent;
-			}
-		}
-		return null;
-	}
+
+//	private Shark containsShark(ArrayList<Agent> neighbor) {
+//		for (Agent agent : neighbor) {
+//			if (agent instanceof Shark) {
+//				return (Shark) agent;
+//			}
+//		}
+//		return null;
+//	}
 
 }

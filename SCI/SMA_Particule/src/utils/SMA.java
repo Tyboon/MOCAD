@@ -4,17 +4,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import view.*;
-
+import view.Panel;
 import agent.Agent;
 
 public class SMA extends Thread {
 	private Environnement env;
-	private ArrayList<Agent> agents;
+	private List<Agent> agents;
+	public int nbFish;
+	public int nbShark;
 	private int nbTour;
 	private int ralent;
 	private Panel panel;
 //	private boolean torique;
+
+	public SMA(int nbFish, int nbShark) {
+		this.nbFish = nbFish;
+		this.nbShark = nbShark;
+	}
+
+	public SMA() {;}
 
 	public void init(int L, int l, int nb, int r, Panel p) {
 		this.env = new Environnement(l, L);
@@ -42,17 +50,28 @@ public class SMA extends Thread {
 	}
 
 	public void run() {
-		while (this.nbTour >= 0) {
+		ArrayList<Integer> fishes = new ArrayList<Integer>();
+		ArrayList<Integer> sharks = new ArrayList<Integer>();
+		while (this.nbTour >= 0 && this.nbFish != 0 && this.nbShark != 0) {
+			
+			fishes.add(this.nbFish);
+			sharks.add(this.nbShark);
 			Collections.shuffle(this.agents);
-			for (Agent a: this.agents) {
+			
+			for (Agent a : new ArrayList<Agent>(this.agents)) {
 				a.decide(); // decide(torique)
 			}
+			
 			try {
 				Thread.sleep(this.ralent);
 			} catch (Exception ignored) {
 			}
+			
 			panel.repaint();
 			this.nbTour--;
 		}
+		Writer.write("data/fishes.txt",fishes);
+		Writer.write("data/sharks.txt",sharks);
+		
 	}
 }

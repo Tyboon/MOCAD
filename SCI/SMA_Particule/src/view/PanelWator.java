@@ -2,6 +2,8 @@ package view;
 
 
 import java.awt.Graphics;
+import java.util.ArrayList;
+
 import utils.SMA;
 import agent.Agent;
 
@@ -15,7 +17,8 @@ public class PanelWator extends Panel {
 		
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for (Agent agent : sma.getAgents()) {
+		ArrayList<Agent> tmp = new ArrayList<Agent>(sma.getAgents());
+		for (Agent agent : tmp) {
 			g.setColor(agent.getColor());
 			g.fillRect(agent.getX() * pxSize, agent.getY() * pxSize, pxSize, pxSize);
 		}

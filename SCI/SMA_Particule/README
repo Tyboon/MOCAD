@@ -35,6 +35,32 @@ Emilie Allart
 		* Meilleure gestion des collisions
 		
 	************************************** WATOR ***************************************************************
+	Compilation :
+		Depuis le dossier src/ lancer : javac -c *.java
+		
+	Lancement :
+		Depus le dossier src/ lancer : java SimulationWator nbRun sleepT L l px nbShark birthShark mealShark nbFish birthFish
+		
+		ex : java Simulation 500 100 150 100 5 20 5 10 100 3
 	
+	Visualisation :
+		Pour visualiser lancer le script python depuis le dossier SMA_Particule ainsi :
+			python plot.py 
 	
+	Paramètres : 
 	
+		nbRun : nombre de tour 
+		sleepT : ralentissement
+		L  : Largeur de la fenêtre
+		l :	hauteur de la fenêtre
+		px : taille des pixels
+		
+		nbShark : nombre de requin
+		birthShark : temps de reproduction des requins
+		mealShark : temps sans manger des requins
+		nbFish : nombre de poisson
+		birthFish : temps de reproduction des poissons
+	
+	Remarque : 
+		- conflit de thread
+		- faire une observation sur de plus grandes données
