@@ -19,13 +19,27 @@ def BWT(genome, SA) :
         l.append(letter)
     return l
 
+def search(genome, SA, seed) :
+    l = []
+    gap = len(seed)
+    len_gen = len(genome)
 
+    for i in SA :
+        print i
+        if i+gap < len_gen :
+            print genome[i:i+gap]
+            if 'ca' > genome[i:i+gap] :
+                return l
+            elif 'ca' == genome[i:i+gap] :
+                print 'yes'
+                l.add(i)
+    return l
 
 if __name__ == "__main__" :
     
-    genome = 'acatgcatgt$'
+    genome = 'acatgcatgt'
     SA = createSA(genome)
-    L = BWT(genome, SA)
-    print L
-
- 
+    print SA
+    #L = BWT(genome, SA)
+    #print L
+    print search(genome, SA, 'ca')  
