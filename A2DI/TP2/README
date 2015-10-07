@@ -1,0 +1,19 @@
+Emilie Allart 
+**** TP2 : Probabilités et règke de Bayes _ Classificateur Bayésien ****
+
+07/10/2015
+
+************** Probabilités et règle de Bayes *****************
+
+1 * Moyenne et Variance pour chaque fichier
+2 * Histogramme pour chaque fichier
+3 * Proba d'être un homme ? Proba d'être une femme ? 
+4 * Proba < 1,6m pour homme ? Proba < 1,6m pour femme ?
+5 * Si 1,8-1,85m quel genre ?
+6 * Risque Empirique ?
+
+*************** Classificateur Bayésien ****************
+
+7 * Comparer le classificateur naïf de Bayes avec le classificateur usant la distribution disjointe
+8 * Comparer la règle de MAP et ML
+9 * Conséquence si classer les femmes 2 fois plus importante ? 
