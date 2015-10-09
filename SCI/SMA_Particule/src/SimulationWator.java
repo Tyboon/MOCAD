@@ -2,7 +2,6 @@ import javax.swing.JFrame;
 
 import utils.SMA;
 import view.Panel;
-import view.PanelBille;
 import view.PanelWator;
 import agent.Fish;
 import agent.Shark;

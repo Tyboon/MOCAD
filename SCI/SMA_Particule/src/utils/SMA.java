@@ -12,6 +12,7 @@ public class SMA extends Thread {
 	private List<Agent> agents;
 	public int nbFish;
 	public int nbShark;
+	public List<Agent> dead = new ArrayList<Agent>();
 	private int nbTour;
 	private int ralent;
 	private Panel panel;
@@ -39,6 +40,7 @@ public class SMA extends Thread {
 	
 	public void remove(Agent a) {
 		this.agents.remove(a);
+		this.dead.add(a);
 	}
 
 	public Environnement getEnv() {
@@ -59,7 +61,8 @@ public class SMA extends Thread {
 			Collections.shuffle(this.agents);
 			
 			for (Agent a : new ArrayList<Agent>(this.agents)) {
-				a.decide(); // decide(torique)
+				if (! dead.contains(a))
+					a.decide(); // decide(torique)
 			}
 			
 			try {
@@ -70,6 +73,9 @@ public class SMA extends Thread {
 			panel.repaint();
 			this.nbTour--;
 		}
+		System.out.println(this.nbFish);
+		System.out.println(this.nbShark);
+		System.out.println(this.agents.size());
 		Writer.write("data/fishes.txt",fishes);
 		Writer.write("data/sharks.txt",sharks);
 		
