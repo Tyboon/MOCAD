@@ -44,5 +44,10 @@ public class Selector {
 			return select_best(jobs,neighbor);
 		return select_first(jobs, neighbor);
 	}
+
+	public static ArrayList<int[]> accept(ArrayList<int[]> tmp) {
+		// TODO
+		return null;
+	}
 	
 }

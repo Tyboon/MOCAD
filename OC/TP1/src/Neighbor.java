@@ -3,6 +3,22 @@ import java.util.Arrays;
 
 
 public class Neighbor {
+	
+	public static ArrayList<int[]> kopt(ArrayList<int[]> job, int j, int k) {
+		ArrayList<int[]> jobs = new ArrayList<int[]>(job);
+		int[] tmp = new int[3];
+		if (j < k) {
+			int t = j;
+			j = k;
+			k = t;
+		}
+		for (int i = 0; i < (j-k); i++) {
+			tmp = Arrays.copyOf( jobs.get(k+i), 3 );
+			jobs.set( (k+i), Arrays.copyOf(jobs.get(j-i), 3) );
+			jobs.set( (j-i), tmp );
+		}
+		return jobs;
+	}
 
 	public static ArrayList<int[]> insert (ArrayList<int[]> job, int j, int k) {
 		ArrayList<int[]> jobs = new ArrayList<int[]>(job);

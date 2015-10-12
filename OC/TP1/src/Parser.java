@@ -3,12 +3,9 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import com.sun.net.httpserver.Authenticator.Failure;
-
 
 public class Parser {
 	
-	@SuppressWarnings("null")
 	public Instance[] parse(String path, int nb_jobs) {
 		Instance[] instances = new Instance[125];
 		try{
@@ -21,7 +18,7 @@ public class Parser {
 			int param = 0; //0 = j, 1 = w, 2 = d 
 			int inst = 0, i = 0;
 			String[] tmp = null; 
-			instances[inst] = new Instance(nb_jobs);
+			instances[inst] = new Instance();
 			
 			while (((line = br.readLine()) != null) && (cpt < nb_jobs*3*125)) {
 			// TQ : pas en fin de fichier 
@@ -52,7 +49,7 @@ public class Parser {
 						
 					} else if ((cpt%(nb_jobs*3) == 0) && (inst < 124)) { // cas : nouvelle instance sauf à la dernière ligne
 						param = 0;
-						instances[++inst] = new Instance(nb_jobs);
+						instances[++inst] = new Instance();
 						instances[inst].add_process(cpt%nb_jobs, Integer.parseInt(tmp[i]));
 					} else { // cas : changement paramètre
 						param = (param+1)%3;

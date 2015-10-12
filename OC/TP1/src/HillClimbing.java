@@ -13,9 +13,9 @@ public class HillClimbing {
 		this.init = ini;
 	}
 	
-	public ArrayList<int[]> launch (Instance inst) {
+	public ArrayList<int[]> launch (ArrayList<int[]> inst) {
 		// INIT
-		ArrayList<int[]> jobs = Scheduler.schedule(inst.jobs, this.init);
+		ArrayList<int[]> jobs = Scheduler.schedule(inst, this.init);
 		
 		boolean progress = true;
 		int cost = Scheduler.cost(jobs);

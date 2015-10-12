@@ -14,9 +14,9 @@ public class PipedVND {
 		this.init = ini;
 	}
 	
-	public ArrayList<int[]> launch (Instance inst) {
+	public ArrayList<int[]> launch (ArrayList<int[]> inst) {
 		// INIT
-		ArrayList<int[]> jobs = Scheduler.schedule(inst.jobs, this.init);
+		ArrayList<int[]> jobs = Scheduler.schedule(inst, this.init);
 		int i = 0, j = 0;
 		int cost = Scheduler.cost(jobs);
 		int cost_t = 0;
