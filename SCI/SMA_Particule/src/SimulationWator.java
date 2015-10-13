@@ -57,7 +57,7 @@ public class SimulationWator {
 		}
 		
 		System.out.println("RUN");
-		sma.run();
+		sma.runWator();
 		System.out.println("FINISH ! ");
 	}
 	
