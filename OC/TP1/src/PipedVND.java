@@ -26,14 +26,16 @@ public class PipedVND {
 			// faire un rdm sur i et ajouter un compteur
 			tmp = Selector.select(jobs, neighbor[i], this.best);
 			cost_t = Scheduler.cost(tmp);
+			System.out.println(cost_t + " v = "+ i);
 			
 			if (cost_t < cost) {
 				cost = cost_t;
 				jobs = new ArrayList<int[]>(tmp);
 				j = 0;
-				i = (i++)%3; //?
+//				i = (i++)%3; //?
 			} else {
-				i = (i++)%3; // ou rdm ? 
+				System.out.println("else");
+				i = (++i)%3; // ou rdm ? 
 				j++;
 			}
 		}
