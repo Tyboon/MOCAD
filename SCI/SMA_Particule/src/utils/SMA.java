@@ -22,7 +22,8 @@ public class SMA extends Thread {
 	private Panel panel;
 //	private boolean torique;
 	public ArrayList<Attractor> attractor;
-
+	public HashMap<Integer, ArrayList<Integer>> hash;
+	
 	public SMA(int nbFish, int nbShark) {
 		this.nbFish = nbFish;
 		this.nbShark = nbShark;
@@ -139,15 +140,17 @@ public class SMA extends Thread {
 	}
 
 	private void initRadar() {
-		HashMap<Integer, ArrayList<Integer>> hash = new HashMap<Integer, ArrayList<Integer>>();
+		this.hash = new HashMap<Integer, ArrayList<Integer>>();
 		this.radar = new int[this.env.getEnv().length][this.env.getEnv()[0].length];
 		for (Attractor at : attractor) {
-			this.pushDistance(at.getX(), at.getY(), this.radar, hash);
+			this.pushDistance(at.getX(), at.getY(), this.radar, this.hash);
 		}
 	}
 
 	private void pushDistance(int x, int y, int[][] r, HashMap<Integer, ArrayList<Integer>> hash) {
 		if (hash.containsKey(x)) {
+			if (hash.get(x).contains(y))
+				return;
 			hash.get(x).add(y);
 		} else {
 			hash.put(x, new ArrayList<Integer>());
@@ -164,15 +167,17 @@ public class SMA extends Thread {
 	}
 
 	private void putDistance(int x, int y, int[][] r, int x_or, int y_or, HashMap<Integer, ArrayList<Integer>> hash) {
-		if ((x < r.length) && (y < r[0].length) && (x >= 0) && (y >= 0) && ((hash.containsKey(x) && ! hash.get(x).contains(y))) || ! hash.containsKey(x)) {
-			if (r[x][y] != 0) {
-				r[x][y] = Math.min(r[x][y], r[x_or][y_or]+1);
-				if(r[x][y] == r[x_or][y_or]+1)
-					this.pushDistance(x, y, r, hash);
-			} else {
-				if (this.env.getAgent(x, y) == null) {
-					r[x][y] = r[x_or][y_or]+1;
-					this.pushDistance(x, y, r, hash);
+		if ((x < r.length) && (y < r[0].length) && (x >= 0) && (y >= 0)) {
+			if ( (hash.containsKey(x) && ! hash.get(x).contains(y)) && !hash.containsKey(x) ){
+				if (r[x][y] != 0) {
+					r[x][y] = Math.min(r[x][y], r[x_or][y_or]+1);
+					if(r[x][y] == r[x_or][y_or]+1)
+						this.pushDistance(x, y, r, hash);
+				} else {
+					if (this.env.getAgent(x, y) == null) {
+						r[x][y] = r[x_or][y_or]+1;
+						this.pushDistance(x, y, r, hash);
+					}
 				}
 			}
 		}
