@@ -8,6 +8,37 @@ pt_b_p = 18
 def init() : 
     pass
 
+def get_v(alpha = 0.9) :
+    r_pi = get_r_pi()
+    p_pi = get_p_pi()
+    ident = np.eye(len(p_pi),len(p_pi))
+    return np.transpose(ident - alpha * p_pi) * r_pi
+
+def get_p_pi(pi = 0.25) :
+    p = np.zeros((25,25))
+    for s in range(25) :
+        for s_new in range(25) :
+            tmp = 0
+            for a in range(4) :
+                print s, s_new, a
+                m_x, m_y = move(s,a)
+                if m_x < 0 :
+                    m_x += 1
+                elif m_x >= 5 :
+                    m_x -= 1
+                if m_y < 0 :
+                    m_y += 1
+                elif m_x >= 5 :
+                    m_y -= 1
+
+                if (m_x * 5 + m_y) == s_new :
+                   tmp += pi * 1
+            p[s,s_new] = tmp
+
+    p[pt_a,pt_a_p] = 1
+    p[pt_b,pt_b_p] = 1
+    return p
+            
 
 def get_r_pi(pi = 0.25) :
 	'''
