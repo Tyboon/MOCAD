@@ -3,7 +3,7 @@ import numpy as np
 pt_a = 1
 pt_b = 3 
 pt_a_p = 21
-pt_b_p = 18
+pt_b_p = 13
 
 def init() : 
     pass
