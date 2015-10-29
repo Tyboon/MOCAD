@@ -3,7 +3,7 @@ import numpy as np
 pt_a = 1
 pt_b = 3 
 pt_a_p = 21
-pt_b_p = 18
+pt_b_p = 13
 
 def init() : 
     pass
@@ -62,29 +62,29 @@ def move(s,a) :
     Renvoie les coordonnees d'arrivee d'apres un mouvement et un etat de depart
     '''
     if (a == 0) :
-        x = (s/5)
-        y = (s % 5) - 1
+        x = (s/5) - 1
+        y = (s % 5)
     elif (a == 1) :
-        x = s/5
-        y = (s % 5) + 1
-    elif (a == 2) :
-        x = s/5 - 1
-        y = (s % 5) 
-    else :
         x = s/5 + 1
         y = (s % 5)
+    elif (a == 2) :
+        x = s/5 
+        y = (s % 5) - 1
+    else :
+        x = s/5 
+        y = (s % 5) + 1
 
     return x, y
 
 
 def cost(s,a) :
-	x, y = move(s,a)
-	if (x * y < 0 or x >= 5 or y >= 5) :
-		return -1
-	if ( (x*5 + y) == pt_a ) :
+	if (s == pt_a) :
 		return 10
-	if ( (x*5+y) == pt_b) :
+	if (s == pt_b) :
 		return 5
+	x, y = move(s,a)
+	if (x < 0 or y <0 or x >= 5 or y >= 5) :
+		return -1
 	return 0
 
 
