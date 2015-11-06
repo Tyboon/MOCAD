@@ -50,13 +50,23 @@ print ""
 print "La probabilité de mesurer moins d'1,60 m pour une femme est de {0}.".format(float(hist_f[0])/nb_f)
 print "\n"
 
+
 #Calcul des probabilités a posteriori
+
+def proba_x_with(x,y) :
+    if y == 'h' :
+        nb = nb_h
+    else : 
+        nb = nb_f
+    return float(hist_h[bins_h.index(int(x))])/nb
 
 p_180_h = float(hist_h[bins_h.index(180)])/nb_h # proba de mesurer 180-185 sachant que c'est un homme
 p_180_f = float(hist_f[bins_f.index(180)])/nb_f # idem sachant que c'est une femme
 
 p_160_h = float(hist_h[bins_h.index(160)])/nb_h # _____ 160-165 sachant que c'est un homme
 p_160_f = float(hist_f[bins_f.index(160)])/nb_f # idem sachant que c'est une femme
+
+
 
 p_h_180 = p_180_h * p_h / (p_180_h * p_h + p_180_f * p_f) # proba d'être un homme si on mesure 180-185
 p_f_180 = p_180_f * p_f / (p_180_h * p_h + p_180_f * p_f) # idem pour la femme
@@ -102,4 +112,60 @@ n,bins,ignore = plt.hist(taille_h,bins=bins_h)
 #plt.plot(bins, 1/(sigma_h * np.sqrt(2 * np.pi)) * np.exp( - (bins - mu_h)**2 / (2 * sigma_h**2) ),linewidth=2, color='r')
 
 plt.show()
+
 '''
+
+def proba_taille(x) :
+    #print (float(hist_h[bins_h.index(x)]) + float(hist_f[bins_f.index(x)]))/(nb_f+nb_h)
+    return (proba_x_with(x,'h') * p_h + proba_x_with(x,'f') * p_f)
+
+def classify_bayes(x) :
+    p_h_pred = proba_x_with(x,'h') * p_h / proba_taille(x)
+    p_f_pred = proba_x_with(x,'f') * p_f / proba_taille(x)
+    if p_h_pred > p_f_pred :
+        return 'h'
+    return 'f'
+
+print classify_bayes(180)
+
+def classify_joint(x) :
+    nb_x_h = float(hist_h[bins_h.index(x)])
+    nb_x_f = float(hist_f[bins_f.index(x)])
+    p_h_pred = (nb_x_h / nb) / proba_taille(x)
+    p_f_pred = (nb_x_f / nb) / proba_taille(x)
+    if p_h_pred > p_f_pred :
+        return 'h'
+    return 'f'
+
+print classify_joint(180)
+
+def error_h_bayes() :
+    err = 0
+    for h in taille_h :
+        if classify_bayes(h) != 'h' :
+            err += 1
+    return err
+
+def error_f_bayes() :
+    err = 0
+    for f in taille_f :
+        if classify_bayes(f) != 'f' :
+            err += 1
+    return err
+
+def MAP() :
+    eh = error_h_bayes()
+    ef = error_f_bayes()
+    return (eh + ef)/nb
+
+print "MAP {0}".format(MAP())
+
+def ML(alpha = 0.1, beta = 0.5) :
+    eh = error_h_bayes()
+    ef = error_f_bayes()
+    return alpha * (eh/nb_h) + beta * (ef/nb_f)
+
+print "ML 50h-50f : {0}".format(ML())
+print "ML 25h-75f : {0}".format(ML(75,25))
+
+
