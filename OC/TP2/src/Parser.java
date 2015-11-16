@@ -34,8 +34,8 @@ public class Parser {
 				tmp = Integer.parseInt(line);
 				list.add(tmp);
 			}
-			br.close(); 
-		}		
+			br.close();
+		}
 		catch (Exception e){
 			System.out.println(e.toString());
 		}

@@ -28,7 +28,8 @@ public class Instance {
 	 * @return cout
 	 */
 	public int cost(int a, int b, int s) {
-		return this.nodes[a*this.size - a*(a+1)/2 + b][s]; 
+		//return this.nodes[a*this.size - a*(a+1)/2 + b][s];
+		return this.nodes[a][s] - this.nodes[b][s];
 	}
 	
 	
