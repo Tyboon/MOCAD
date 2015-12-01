@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 
 public class Instance {
@@ -6,11 +5,11 @@ public class Instance {
 	private int[][] nodes;
 	private int size;
 	
-	public Instance(ArrayList<Integer> city1, ArrayList<Integer> city2) {
-		this.size = city1.size();
+	public Instance(int[] tab1, int[] tab2, int size) {
+		this.size = size;
 		this.nodes = new int[this.size][2];
 		for (int i = 0; i < this.size; i++) {
-			int[] tab= {(int) city1.get(i), (int) city2.get(i)}; 
+			int[] tab= {tab1[i], tab2[i]}; 
 			nodes[i] = tab;
 		}
 		return;

@@ -1,11 +1,11 @@
-import java.util.ArrayList;
+
 
 public class Main {
 	public static void main(String[] args) {
-		ArrayList<Integer> list1 = (ArrayList<Integer>) Parser.parse("data/randomA100.tsp");
-		ArrayList<Integer> list2 = (ArrayList<Integer>) Parser.parse("data/randomB100.tsp");
+		int[] tab1 = Parser.parse("data/randomA100.tsp", 100);
+		int[] tab2 =  Parser.parse("data/randomB100.tsp", 100);
 		
-		Instance inst  = new Instance(list1, list2);
+		Instance inst  = new Instance(tab1, tab2, 100);
 		for (int[] i: inst.getNodes()) {
 			System.out.println(i[0] + " - " + i[1]);
 		}

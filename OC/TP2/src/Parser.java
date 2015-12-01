@@ -2,8 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Parser {
@@ -13,8 +11,8 @@ public class Parser {
 	 * @param path
 	 * @return list
 	 */
-	public static List<Integer> parse(String path) {
-		List<Integer> list = new ArrayList<Integer>();
+	public static int[] parse(String path, int size) {
+		int[] tab = new int[size];
 		try{
 			InputStream ips = new FileInputStream(path); 
 			InputStreamReader ipsr = new InputStreamReader(ips);
@@ -32,13 +30,13 @@ public class Parser {
 				
 				// cast la ligne				
 				tmp = Integer.parseInt(line);
-				list.add(tmp);
+				tab[cpt-7] = tmp;
 			}
 			br.close();
 		}
 		catch (Exception e){
 			System.out.println(e.toString());
 		}
-		return list;
+		return tab;
 	}
 }

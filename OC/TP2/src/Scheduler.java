@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
-
+import smtwtp.*;
 
 
 public class Scheduler {
@@ -38,5 +38,15 @@ public class Scheduler {
 			sum += this.inst.cost(l.get(i), l.get(i+1), s);
 		}
 		return sum;
+	}
+	
+	public ArrayList<Integer> mTSPscalaire(int nbObj, int gap, ArrayList<Integer[]> order) {
+		ArrayList<Integer> score = new ArrayList<>();
+		int[] score_mono = new int[nbObj];
+		for (int obj = 0; obj < nbObj; obj++) {
+			score_mono[obj] = ILS.launch(order, obj);
+		}
+		
+		return score;
 	}
 }
