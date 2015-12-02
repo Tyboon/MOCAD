@@ -36,7 +36,7 @@ def get_p_pi(pi = 0.25) :
 					elif m_x >= 5 :
 						m_y -= 1
 					if (m_x * 5 + m_y) == s_new :
-						tmp += pi * 1
+						tmp += pi * 1  # ici pi * (0.85 * (cost a) + 0.05 * ( sum autres cost)) 
 				p[s,s_new] = tmp
 	return p
 			

@@ -85,4 +85,7 @@ if __name__ == "__main__" :
         X.append(out)
     X = np.array(X)
     plt.plot(X[:,0],X[:,1])
+    plt.title('A(0) = 10')
+    plt.ylabel('[A]')
+    plt.xlabel('temps')
     plt.show()
