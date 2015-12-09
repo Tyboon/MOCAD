@@ -6,19 +6,22 @@ import matplotlib.pyplot as plt
 # reaction matrix 
 #mat_stoechio = np.matrix('-1 -1 1; -2 0 1; -2 -2 2')
 #mat_stoechio = np.matrix('-1')
-react = np.matrix('-1 -1 0; -2 0 0; -2 -2 0')
-product = np.matrix('0 0 1; 0 0 1; 0 0 2')
+#react = np.matrix('-1 -1 0; -2 0 0; -2 -2 0')
+#product = np.matrix('0 0 1; 0 0 1; 0 0 2')
+react = np.matrix('-1')
+product = np.matrix('0')
+
 
 # initial quantity
-quantity = [3,2,0]
-#quantity = [1000]
+#quantity = [3,2,0]
+quantity = [10000000]
 
 # number of composites
 nb_compo = len(quantity)
 
 # parameter a : proba of reaction
-a = [0.1,0.1,0.1]
-#a = [0.1]
+#a = [0.1,0.1,0.1]
+a = [0.1]
 
 # nb reaction
 nb_reaction = len(a)
@@ -83,10 +86,15 @@ if __name__ == "__main__" :
         for i in range(nb_compo):
             quantity[i] += react[r,i] + product[r,i]
             out.append(quantity[i])
+            if quantity[i] == 5000000 :
+                    t_ = t
         X.append(out)
+    print t_
     X = np.array(X)
-    plt.plot(X[:,0],X[:,1])
-    plt.title('A(0) = 10')
+    p1 = plt.plot(X[:,0],X[:,1])
+    p2 = plt.plot([t_,t_], [0,10000000])
+    plt.legend([p1,p2],["A(t)","1/2A(0)"])
+    plt.title('A(0) = 10000000')
     plt.ylabel('[A]')
     plt.xlabel('temps')
     plt.show()

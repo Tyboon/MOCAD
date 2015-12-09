@@ -82,7 +82,7 @@ if __name__ == "__main__" :
             quantity[i] += mat_stoechio[r,i]
             out.append(quantity[i])
         X.append(out)
-		  print out
+        print out
     X = np.array(X)
     plt.plot(X[:,0],X[:,1])
     plt.title('A(0) = 10')
