@@ -4,8 +4,10 @@ import math
 import matplotlib.pyplot as plt
 
 # reaction matrix 
-mat_stoechio = np.matrix('-1 -1 1; -2 0 1; -2 -2 2')
+#mat_stoechio = np.matrix('-1 -1 1; -2 0 1; -2 -2 2')
 #mat_stoechio = np.matrix('-1')
+react = np.matrix('-1 -1 0; -2 0 0; -2 -2 0')
+product = np.matrix('0 0 1; 0 0 1; 0 0 2')
 
 # initial quantity
 quantity = [3,2,0]
@@ -13,7 +15,6 @@ quantity = [3,2,0]
 
 # number of composites
 nb_compo = len(quantity)
-
 
 # parameter a : proba of reaction
 a = [0.1,0.1,0.1]
@@ -32,8 +33,8 @@ def get_h(i) :
     tmp = 1
     for c in range(nb_compo):
         n = quantity[c]
-        k = mat_stoechio[i,c]
-        if k<0 : 
+        k = react[i,c]
+        if k<0 : ################# TOSEE utile ?? 
             if  n < -k :
                 return 0
             cpt1 = 1
@@ -73,16 +74,16 @@ if __name__ == "__main__" :
     while t < t_max :
         out = [] # form t q1 q2 q3
         tho = get_tho()
+        print t, quantity
         if tho == -1 :
             break
         r = get_reaction()
         t = t + tho
         out.append(t)
         for i in range(nb_compo):
-            quantity[i] += mat_stoechio[r,i]
+            quantity[i] += react[r,i] + product[r,i]
             out.append(quantity[i])
         X.append(out)
-		  print out
     X = np.array(X)
     plt.plot(X[:,0],X[:,1])
     plt.title('A(0) = 10')
