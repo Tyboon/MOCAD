@@ -23,7 +23,7 @@ quantity = [100000]
 nb_compo = len(quantity)
 
 # parameter a : proba of reaction
-a = [0.002]
+a = [0.001]
 #a = [0.1]
 
 # nb reaction

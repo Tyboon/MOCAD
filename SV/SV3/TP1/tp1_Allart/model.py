@@ -1,3 +1,4 @@
+# Emilie Allart
 import numpy as np
 import random as rdm
 import math
