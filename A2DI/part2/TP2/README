@@ -1,0 +1,18 @@
+Emilie Allart
+** TP2 : SVD and ILS **
+
+q = "dies dagger"
+peut normaliser die et died en die 
+
+1 * Créer la matrice terme-document pour d1, d2 ... d5 : X dans R(n*5) (n : taille du vocabulaire dans d1, d2 .. d5)
+    X(ij) : # d'occurence du terme i dans le document j
+
+2 * Représenter la requête sous forme vectorielle : q-> dans R(n).
+
+3 * Construiser un classement sur d1->, ..., d5-> en termes de similarité par rapport à la q-> (similarité définie comme la distance cosine entre di-> et q->). Expliquez.
+
+4 * Faites une réduction des documents/requête en 2D ne utilisant la SVD : Z(2) = U(2)E(2)V(2).T
+
+5 * Reclassser les documents en fonction de la requête, après projection dans l'espace réduit. Commenter et comparer avec le classement original.
+
+6 * Visualiser et requête en 2D.
