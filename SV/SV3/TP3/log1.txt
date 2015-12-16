@@ -1,0 +1,37 @@
+PRISM
+=====
+
+Version: 4.3
+Date: Wed Dec 16 13:55:05 CET 2015
+Hostname: b04p3.fil.univ-lille1.fr
+Memory limits: cudd=1g, java(heap)=910.5m
+
+Type:        CTMC
+Modules:     simpleONOFF 
+Variables:   X_ Y_ 
+
+---------------------------------------------------------------------
+
+Building model...
+
+Computing reachable states...
+
+Reachability (BFS): 2 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Time for model construction: 0.049 seconds.
+
+Type:        CTMC
+States:      2 (1 initial)
+Transitions: 2
+
+Rate matrix: 10 nodes (3 terminal), 2 minterms, vars: 2r/2c
+
+Exporting list of reachable states in plain text format below:
+(X_,Y_)
+0:(0,1)
+1:(1,0)
+
+Exporting transition matrix in plain text format below:
+2 2
+0 1 1.5
+1 0 0.5

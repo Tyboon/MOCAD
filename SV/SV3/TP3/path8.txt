@@ -1,0 +1,17 @@
+action step X_
+- 0 15
+[degrad] 1 14
+[degrad] 2 13
+[degrad] 3 12
+[degrad] 4 11
+[degrad] 5 10
+[degrad] 6 9
+[degrad] 7 8
+[degrad] 8 7
+[degrad] 9 6
+[degrad] 10 5
+[degrad] 11 4
+[degrad] 12 3
+[degrad] 13 2
+[degrad] 14 1
+[degrad] 15 0

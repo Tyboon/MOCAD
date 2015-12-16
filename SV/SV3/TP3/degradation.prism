@@ -1,0 +1,12 @@
+// model type
+ctmc
+
+// constants
+const A0 = 15;
+const double rateDegrad = 0.1;
+
+module degradation 
+	X_ : [0..A0] init A0;
+
+	[degrad]  (X_>=2)  -> (rateDegrad) : (X_' = X_ - 2);
+endmodule

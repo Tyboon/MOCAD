@@ -1,0 +1,12 @@
+Emilie Allart 
+** TP1 : PCA **
+
+1 * Lancer python PCA.py
+
+2 * On voit clairement les différentes classes avec les nouvelles présentations
+
+3 * Le pourcentage de variance totale est d'autant plus meilleurs quand on garde plus de dimension. En effet, on conserve plus d'information donc on s'éloigne moins de la représentation des données
+
+4 * Pour reconstruire les données originales, il suffit de multiplier la matrice réduite par les vecteurs propres  
+
+5 * Cf les erreurs de reconstruction en console. plus on garde de dimensions, meilleur est la reconstruction. On perd moins d'information.

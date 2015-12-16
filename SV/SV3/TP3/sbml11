@@ -1,0 +1,17 @@
+action step _A
+- 0 15
+[reaction_1] 1 14
+[reaction_1] 2 13
+[reaction_1] 3 12
+[reaction_1] 4 11
+[reaction_1] 5 10
+[reaction_1] 6 9
+[reaction_1] 7 8
+[reaction_1] 8 7
+[reaction_1] 9 6
+[reaction_1] 10 5
+[reaction_1] 11 4
+[reaction_1] 12 3
+[reaction_1] 13 2
+[reaction_1] 14 1
+[reaction_1] 15 0

@@ -1,0 +1,36 @@
+// model type
+ctmc
+
+// constants
+const ON = 1;
+const OFF = 0;
+const double rateToOFF = 0.5;
+const double rateToON = 1.5;
+
+module simpleONOFF
+    // var name   // range  // initial value
+    X_:           [OFF..ON] init ON;
+    Y_:           [OFF..ON] init OFF;
+
+    // transition    guard          rate         how to obtain new state
+    // label            
+    [switchOFF]      (X_ = ON)   -> (rateToOFF): (X_' = OFF) & (Y_' = ON);
+    [switchON]       (X_ = OFF)  -> (rateToON):  (X_' = ON)   & (Y_' = OFF);
+endmodule 
+
+        // nom
+rewards "X_"
+    // guard   // value
+    true :     X_;
+endrewards
+
+        // nom
+rewards "switchON"
+    // transition   // guard    // value
+    // name 
+    [switchON]      true :      1;
+endrewards
+
+rewards "verif"
+	X_ = 1 - Y_ : 1;
+endrewards
