@@ -1,5 +1,6 @@
 import numpy as np
 from scipy import linalg
+import matplotlib.pyplot as plt
 
 def similarity(doc, req) :
     return np.dot(doc, req) / (np.linalg.norm(doc) * np.linalg.norm(req))
@@ -37,6 +38,7 @@ q = q.split()
 terms = list(set(d1+d2+d3+d4+d5))
 term_doc, term_q = [], []
 
+print "TERMS : "
 print terms
 
 for w in terms :
@@ -49,13 +51,13 @@ for w in terms :
 
 term_doc = np.asarray(term_doc)
 
-print term_q
-print len(term_q)
-
 simil = []
 for i in range(5) :
     simil.append(similarity(term_doc[:,i], term_q))
+
+print "\nSimilarity : "
 print simil
+print "L'ordre des doc est 3 2 4 5 1 \n"
 
 u,e,v = linalg.svd(term_doc) 
 e = np.diag(e)
@@ -71,7 +73,10 @@ q_k = np.dot(np.dot(np.linalg.inv(e), u.T), term_q)
 simil2 =[]
 for i in range(5) :
 	simil2.append(similarity(d_k[:,i], q_k))
+
+print "Similarity after reducing : "
 print simil2
+print "On voit que l'ordre est  3 1 2 4 5 \n"
 
 
-
+print " On voit donc que le document 3 est le plus representative des donnees. "
