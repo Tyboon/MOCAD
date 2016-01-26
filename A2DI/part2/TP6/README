@@ -1,0 +1,13 @@
+Emilie Allart
+26/01/16
+
+
+Q1 * Use the power method to compute the eigenvectors and eigenvalues of the following matrices : 
+    A = ((4 5) (6 5)) et B = ((-4 10) (7 5))
+    Discuss and compare the convergence rates wrt the eigenvalues.
+
+Q2 * For the following graph, compute PageRank, hub and authority scores for each of the three pages.
+    d1| ------------> d2 |------------> |d3
+      |                  |<-----------  |
+      | ------------------------------> |
+    Discuss the change in ranks with different damping factors in PageRank. Discuss the convergence you observe wrt different damping factors (alpha)                        
