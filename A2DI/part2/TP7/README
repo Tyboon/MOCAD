@@ -1,0 +1,61 @@
+Homework on Online Learning
+===========================
+
+(0) Download code-stub.tgz from:
+
+http://researchers.lille.inria.fr/~pdenis/code-stub.tgz
+
+unpack it, and set up your PYTHONPATH as follows:
+
+> export PYTHONPATH=$PYTHONPATH:<download-dir>/code-stub/py
+ 
+
+(1) Complete the "update" method of the class PerceptronBinary in
+code-stub/py/polka/classification/binary.py. You can test your
+implementation by running:
+
+> python <download-dir>/code-stub/py/polka/classification/binary.py -d
+  <download-dir>/code-stub/data/tennis/tennis.train -t
+  <download-dir>/code-stub/data/tennis/tennis.test -u perc
+
+Try different number of iterations: 1, 5, 10, 100, ...
+
+(2) Similarly, complete the "update" method of the class PABinary in
+code-stub/py/polka/classification/binary.py, implementing the PA-II
+update rule. Again, you can test your implementation by running:
+
+> python <download-dir>/code-stub/py/polka/classification/binary.py -d
+  <download-dir>/code-stub/data/tennis/tennis.train -t
+  <download-dir>/code-stub/data/tennis/tennis.test -u pa
+
+
+Try different number of iterations, and also different values for the
+aggressiveness parameter C. 
+
+How do the performance of the PA-I compare with that of the plain
+vanilla perceptron? Comment. 
+
+In general, you can obtain help by running:
+
+> python <download-dir>/code-stub/py/polka/classification/binary.py -h
+
+(3) Implement weight averaging for both the perceptron and the PA, and
+run the same experiments. 
+
+(4) Pick a dataset of your liking and compare the perceptron and the
+PA, both unaveraged and averaged, on this dataset. This time, make
+sure to split your data into train, dev, and test, and use the dev set
+to tune your hyperparameters (i.e., number of iterations and
+aggressiveness parameters). The test data should only be used for the
+final evaluation. 
+
+Make sure that your dataset is formatted as follows:
+
+1   F1:1.0 F2:1.0 F3:1.0
+-1  F2:1.0 F3:1.0 F8:1.0
+-1  F1:1.0 F2:1.0
+1   F8:1.0 F9:1.0 F10:1.0
+
+If you don't have a dataset at hand, use one of the UCI datasets: 
+
+https://archive.ics.uci.edu/ml/datasets.html
