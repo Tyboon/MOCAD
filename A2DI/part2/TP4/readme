@@ -1,0 +1,101 @@
+Emilie Allart _ Leo Perard
+TP4 : Apprentissage dans les graphes
+26/01/2016
+
+
+1 * Télécharger les données iris
+2 * Construisez un E-grape des similarités
+3 * Choisir 3 points au hasard, un pour chaque classe
+4 * Appliquer l'algo itératif harmonique pour prédire les labels inconnus
+5 * Mesurer l'erreur sur les labels "inconnus". Justifier la mesure choisie
+6 * Que se passe t-il lorsqu'on augmente le nombre de labels connus ?
+7 * Comment le choix du E influence l'algo ?
+
+
+Ligne de commande : python graphLearning.py k epsilon sigma
+
+5 ** Le calcul de l'erreur est un comptage du nombre de données mal instantiées par classe.
+
+6 **
+*******************************************************************
+ Parameter
+ k : 5
+ epsilon: 0.1
+ sigma: 1.0
+
+k random choose : class  number_learned
+0 1
+1 2
+2 2
+
+ Result : class  number_errors
+0 0
+1 4
+2 11
+
+******************************************************************
+ Parameter
+ k : 10
+ epsilon: 0.1
+ sigma: 1.0
+
+k random choose : class  number_learned
+0 1
+1 4
+2 5
+
+ Result : class  number_errors
+0 0
+1 0
+2 8
+
+=> En augmentant le nombre de labels connus, on réduit le nombre d'erreur
+
+7 **
+****************************************************************
+Parameter
+ k : 10
+ epsilon: 0.1
+ sigma: 1.0
+
+k random choose : class  number_learned
+0 1
+1 4
+2 5
+
+ Result : class  number_errors
+0 0
+1 0
+2 8
+****************************************************************
+ Parameter
+ k : 10
+ epsilon: 0.5
+ sigma: 1.0
+
+k random choose : class  number_learned
+0 2
+1 5
+2 3
+
+ Result : class  number_errors
+0 0
+1 2
+2 28
+***************************************************************
+ Parameter
+ k : 10
+ epsilon: 1.0
+ sigma: 1.0
+
+k random choose : class  number_learned
+0 4
+1 1
+2 5
+
+ Result : class  number_errors
+0 0
+1 49
+2 45
+
+=> Le choix du epsilon augmente le nombre d'erreur sur les 2 autres classes.

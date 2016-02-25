@@ -1,0 +1,14 @@
+Emilie Allart - Leo Perard
+26/02/2016
+Clustering spectral
+
+1 * Construire le graphe de similarité
+2 * Implémenter l'algorithme de clustering spectral
+3 * Comparerk-means avec le clustering spectral
+
+Ligne de commande : python spectral_clustering.py
+
+Voir le fichier de sortie output.txt associé.
+
+Si on prend le epsilon et le sigma optimal, ou ceux qui s'en rapproche, on voit que le clustering spectral prend le dessus sur le Kmeans.
+
