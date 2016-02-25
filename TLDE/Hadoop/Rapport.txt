@@ -1,0 +1,48 @@
+
+CORE-SITE.XML
+
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://hadoop.fil.univ-lille1.fr:9000</value>
+    </property>
+</configuration>
+
+HDFS-SITE.XML
+
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+    <property>
+        <name>dfs.name.dir</name>
+        <value>file:///hadoop/hadoopinfra/hdfs/namenode</value>
+    </property>
+    <property>
+        <name>dfs.data.dir</name>
+        <value>file:///hadoop/hadoopinfra/hdfs/datanode</value>
+    </property>
+</configuration>
+
+
+MAPRED-SITE.XML
+
+<configuration>
+    <property>
+          <name>mapreduce.framework.name</name>
+              <value>yarn</value>
+       </property>
+</configuration>
+
+YARN-SITE.XML
+
+  <property>
+       <name>yarn.nodemanager.aux-services</name>
+       <value>mapreduce_shuffle</value>
+   </property>
+
+SLAVES
+
+localhost
+
